@@ -32,8 +32,8 @@ const widget = {
 const getNumbersElement = (w) => {
     let result = [];
     for (let v in w) {
-        for(let k in v) {
-            if (isNaN(v)) result.push(v)
+        for(let k in w[v]) {
+            if (!isNaN(w[v][k])) result.push(k)
         }
     }
     return result
