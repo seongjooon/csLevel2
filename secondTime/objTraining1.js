@@ -33,8 +33,7 @@ const getNumbersElement = (w) => {
     let result = [];
     for (let v in w) {
         for(let k in v) {
-            console.log(v[k])
-            // if (isNaN(v)) result.push(v)
+            if (isNaN(v)) result.push(v)
         }
     }
     return result

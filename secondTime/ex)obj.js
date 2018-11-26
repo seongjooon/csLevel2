@@ -11,12 +11,13 @@ const widget = {
         "height": 500
     }
 }
-console.log(widget.window.width)
+console.log(Object.keys(widget.window))
 
 
 function getValue(w) {
     let result = [];
-    if(isNaN(w.window.width)) result.push()
+    console.log(w.window.width)
+    if(isNaN(Object.values(w.window))) result.push(Object.keys(w.window))
     return result
 }
 console.log(getValue(widget));
