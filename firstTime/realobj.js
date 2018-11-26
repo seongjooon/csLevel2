@@ -1,4 +1,4 @@
-let numbers = [{
+const numbers = [{
     "id": 1,
     "name": "Yong",
     "phone": "010-0000-0000",
