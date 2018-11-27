@@ -33,7 +33,7 @@ const getNumbersElement = (w) => {
     let result = [];
     for (let v in w) {
         let sndObj = w[v];
-        for(let k in sndObj) {
+        for (let k in sndObj) {
             let value = sndObj[k]
             if (!isNaN(value)) result.push(k)
         }
