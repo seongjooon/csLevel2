@@ -32,10 +32,16 @@ const widget = {
 const getNumbersElement = (w) => {
     let result = [];
     for (let v in w) {
-        for(let k in w[v]) {
-            if (!isNaN(w[v][k])) result.push(k)
+        let sndObj = w[v];
+        for(let k in sndObj) {
+            let value = sndObj[k]
+            if (!isNaN(value)) result.push(k)
         }
     }
     return result
 }
 console.log(getNumbersElement(widget))
+
+//for in 에서 object 의  key 와 value 표현
+//for(let key in object) 
+//object[key] ==> value
