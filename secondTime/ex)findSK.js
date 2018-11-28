@@ -11,15 +11,11 @@ const customer = [{
     }]
 }]
 
+let arr = [];
 function getSKCustomer(c) {
-    let arr = [];
-    for (let key in c) {
-        for (let key2 in c[key]) {
-            if (c[key][key2] === "sk") {
-                arr.push(c[key]["name"])
-            }
-        }
+    for (let i = 0; i < c.length; i++) {
+        if (c[i]["type"] == "sk") arr.push(c[i])
     }
-    return arr;
+    return 
 }
 console.log(getSKCustomer(customer))
