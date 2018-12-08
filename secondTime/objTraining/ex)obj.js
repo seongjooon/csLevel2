@@ -11,7 +11,7 @@ const widget = {
         "height": 500
     }
 }
-console.log(Object.keys(widget.window))
+console.log(widget.window)
 
 
 function getValue(w) {
@@ -21,22 +21,6 @@ function getValue(w) {
     return result
 }
 console.log(getValue(widget));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
