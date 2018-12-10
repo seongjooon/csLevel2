@@ -35,7 +35,7 @@ const todo = {
         return `id: ${i.tag}, "${i.name}" 항목이 새로 추가됐습니다.`
     },
     update(j) {
-        const selectObj = todo.list[j.id - 1]
+        const selectObj = this.list[j.id - 1]
         const lowerStatus = j.nextstatus.toLowerCase()
         if (selectObj.id === j.id) {
             if (lowerStatus === "todo") selectObj.status = lowerStatus
@@ -43,7 +43,12 @@ const todo = {
             if (lowerStatus === "done") selectObj.status = lowerStatus
         }
         return `id: ${selectObj.id}, ${selectObj.name} 항목이 ${selectObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
-                현재상태 : todo: ${todo.list.filter(s => s.status == "todo").length}개, doing: ${todo.list.filter(s => s.status == "doing").length}개, done: ${todo.list.filter(s => s.status == "done").length}개`
+                현재상태 : todo: ${this.list.filter(s => s.status == "todo").length}개, doing: ${this.list.filter(s => s.status == "doing").length}개, done: ${this.list.filter(s => s.status == "done").length}개`
+    },
+    remove(k) {
+            const deleteArr = this.list[k.id-1].name
+            this.list.splice(k.id-1, 1)
+            return `id:${k.id}, ${deleteArr} 삭제완료`
     }
 }
 //////
@@ -52,5 +57,6 @@ console.log(todo.list)
 console.log(todo.add({ name: "자바스크립트 공부하기", tag: "programming" }))
 //update
 console.log(todo.update({ id: 4, nextstatus: "doNe" }))
-
-console.log(todo.list.filter(s => s.status == "done"))
+//remove
+console.log(todo.remove({ id: 3 }))
+console.log(todo.list)
