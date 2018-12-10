@@ -29,13 +29,20 @@ const todo = {
         { name: "iOS공부하기", tag: "iOS studying", id: 3, status: "doing" },
     ],
     add(i) {
-        i.tag = this.list.length + 1;
+        i.id = this.list.length + 1;
         i.status = "todo";
         this.list.push(i);
         return `id: ${i.tag}, "${i.name}" 항목이 새로 추가됐습니다.`
     },
     update(j) {
-
+        const selectObj = todo.list[j.id - 1]
+        const lowerStatus = j.nextstatus.toLowerCase()
+        if (selectObj.id === j.id) {
+            if (lowerStatus === "todo") selectObj.status = lowerStatus
+            if (lowerStatus === "doing") selectObj.status = lowerStatus
+            if (lowerStatus === "done") selectObj.status = lowerStatus
+        }
+        return `id: ${selectObj.id}, ${selectObj.name} 항목이 ${selectObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n현재상태 : `
     }
 }
 //////
@@ -43,4 +50,4 @@ console.log(todo.list)
 //add
 console.log(todo.add({ name: "자바스크립트 공부하기", tag: "programming" }))
 //update
-console.log(todo.update({id:4,  nextstatus:"doNe"}))
+console.log(todo.update({ id: 4, nextstatus: "doNe" }))
