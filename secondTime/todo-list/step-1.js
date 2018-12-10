@@ -29,26 +29,37 @@ const todo = {
         { name: "iOS공부하기", tag: "iOS studying", id: 3, status: "doing" },
     ],
     add(i) {
-        i.id = this.list.length + 1;
+        const len = this.list.length
+        i.id = this.list[len-1].id + 1;
         i.status = "todo";
         this.list.push(i);
         return `id: ${i.tag}, "${i.name}" 항목이 새로 추가됐습니다.`
     },
     update(j) {
-        const selectObj = this.list[j.id - 1]
+        const [selectObj] = this.list.filter(s => s.id == j.id)  //뭔가 ES6에선 될것같아서 ㅋㅋㅋ했는데 되네
         const lowerStatus = j.nextstatus.toLowerCase()
-        if (selectObj.id === j.id) {
-            if (lowerStatus === "todo") selectObj.status = lowerStatus
-            if (lowerStatus === "doing") selectObj.status = lowerStatus
-            if (lowerStatus === "done") selectObj.status = lowerStatus
-        }
-        return `id: ${selectObj.id}, ${selectObj.name} 항목이 ${selectObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
+        const print = `id: ${selectObj.id}, ${selectObj.name} 항목이 ${selectObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
                 현재상태 : todo: ${this.list.filter(s => s.status == "todo").length}개, doing: ${this.list.filter(s => s.status == "doing").length}개, done: ${this.list.filter(s => s.status == "done").length}개`
+        if (selectObj.id === j.id) {
+            if (lowerStatus === "todo") {
+                selectObj.status = lowerStatus
+                return print
+            }
+            if (lowerStatus === "doing") {
+                selectObj.status = lowerStatus
+                return print
+            }
+            if (lowerStatus === "done") {
+                selectObj.status = lowerStatus
+                return print
+            }
+        }
+        
     },
     remove(k) {
-            const deleteArr = this.list[k.id-1].name
+        const [deleteArr] = this.list.filter(s => s.id == k.id)
             this.list.splice(k.id-1, 1)
-            return `id:${k.id}, ${deleteArr} 삭제완료`
+            return `id:${k.id}, ${deleteArr.name} 삭제완료`
     }
 }
 //////
@@ -59,4 +70,6 @@ console.log(todo.add({ name: "자바스크립트 공부하기", tag: "programmin
 console.log(todo.update({ id: 4, nextstatus: "doNe" }))
 //remove
 console.log(todo.remove({ id: 3 }))
+//final
 console.log(todo.list)
+
