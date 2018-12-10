@@ -10,9 +10,6 @@ todo/doing/done 상태를 가짐(add시에는 todo)
 코드의 형태는 객체리터럴 형태로 구현한다.
 
 -동작형태 
-> todo.remove({id:3});
-id:3, iOS공부하기 삭제완료. '
-
 > todo.add({name: "자바스크립트 공부하기", tag:"programming"});  // 태그를 입력받는다.
 id: 5,  "자바스크립트 공부하기" 항목이 새로 추가됐습니다. 
 현재상태 :  todo:1개, doing:2개, done:2개
@@ -20,6 +17,9 @@ id: 5,  "자바스크립트 공부하기" 항목이 새로 추가됐습니다.
 > todo.update({id:4,  nextstatus:"doNe"});  //대소문자 모두 잘 된다.
 id: 4,  "자바스크립트 공부하기" 항목이 todo => done 상태로 업데이트 됐습니다.
 현재상태 :  todo:1개, doing:1개, done:4개 
+
+> todo.remove({id:3});
+id:3, iOS공부하기 삭제완료.
 */
 
 const todo = {
@@ -42,7 +42,8 @@ const todo = {
             if (lowerStatus === "doing") selectObj.status = lowerStatus
             if (lowerStatus === "done") selectObj.status = lowerStatus
         }
-        return `id: ${selectObj.id}, ${selectObj.name} 항목이 ${selectObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n현재상태 : `
+        return `id: ${selectObj.id}, ${selectObj.name} 항목이 ${selectObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
+                현재상태 : todo: ${todo.list.filter(s => s.status == "todo").length}개, doing: ${todo.list.filter(s => s.status == "doing").length}개, done: ${todo.list.filter(s => s.status == "done").length}개`
     }
 }
 //////
@@ -51,3 +52,5 @@ console.log(todo.list)
 console.log(todo.add({ name: "자바스크립트 공부하기", tag: "programming" }))
 //update
 console.log(todo.update({ id: 4, nextstatus: "doNe" }))
+
+console.log(todo.list.filter(s => s.status == "done"))
