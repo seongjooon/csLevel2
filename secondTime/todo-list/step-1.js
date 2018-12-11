@@ -43,7 +43,7 @@ const todoCrud = {
         return `id: ${lastTaskId}, "${addTask.name}" 항목이 새로 추가됐습니다.`
     },
     update: (task) => {
-        const [selectedObj] = todoList.list.filter(listArr => listArr.id == task.id)
+        const [selectedObj] = [...todoList.list].filter(listArr => listArr.id == task.id)
         const lowerStatus = task.nextstatus.toLowerCase()
         if (selectedObj.id === task.id) {
             selectedObj.status = lowerStatus
@@ -52,7 +52,7 @@ const todoCrud = {
         }
     },
     remove: (task) => {
-        const [deleteArr] = todoList.list.filter(listArr => listArr.id == task.id)
+        const [deleteArr] = [...todoList.list].filter(listArr => listArr.id == task.id)
         todoList.list.splice(task.id - 1, 1)
         return `id:${task.id}, ${deleteArr.name} 삭제완료`
     }
