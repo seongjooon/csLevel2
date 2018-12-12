@@ -36,21 +36,24 @@ const util = {
 
 const todoCrud = {
     add: (addTask) => {
-        const asdf = 1;
-        const lastTaskId = [...todoList.list].pop().id + asdf
+        const plusIdNumber = 1;
+        const lastTaskId = [...todoList.list].pop().id + plusIdNumber
         const newList = [...todoList.list, { name: addTask.name, tag: addTask.tag, id: lastTaskId, status: "todo" }]
         todoList.list = newList
         return `id: ${lastTaskId}, "${addTask.name}" 항목이 새로 추가됐습니다.`
     },
-    update: (task) => {
-        const [selectedObj] = [...todoList.list].filter(listArr => listArr.id == task.id)
-        const lowerStatus = task.nextstatus.toLowerCase()
-        if (selectedObj.id === task.id) {
+
+    update: (status) => {
+        const [selectedObj] = [...todoList.list].filter(listArr => listArr.id == status.id)
+        const lowerStatus = status.nextstatus.toLowerCase()
+        const print = `id: ${selectedObj.id}, ${selectedObj.name} 항목이 ${selectedObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
+        현재상태 : todo: ${util.getTask('todo')}개, doing: ${util.getTask('doing')}개, done: ${util.getTask('done')}개`
+        if (selectedObj.id === status.id) {
             selectedObj.status = lowerStatus
-            return `id: ${selectedObj.id}, ${selectedObj.name} 항목이 ${selectedObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
-            현재상태 : todo: ${util.getTask('todo')}개, doing: ${util.getTask('doing')}개, done: ${util.getTask('done')}개`
+            return print;
         }
     },
+
     remove: (task) => {
         const [deleteArr] = [...todoList.list].filter(listArr => listArr.id == task.id)
         todoList.list.splice(task.id - 1, 1)
@@ -59,10 +62,7 @@ const todoCrud = {
 }
 
 console.log(todoList.list)
-
 console.log(todoCrud.add({ name: "자바스크립트 공부하기", tag: "programming" }))
-
 console.log(todoCrud.update({ id: 4, nextstatus: "doNe" }))
-
-console.log(todoList.list)
 console.log(todoCrud.remove({ id: 3 }))
+console.log(todoList.list)
