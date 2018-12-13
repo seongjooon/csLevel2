@@ -22,29 +22,27 @@ id: 4,  "자바스크립트 공부하기" 항목이 todo => done 상태로 업�
 id:3, iOS공부하기 삭제완료.
 */
 
-const todoList = {
-    list: [
-        { name: "훈련", tag: "training", id: 1, status: "done" },
-        { name: "등산", tag: "climing", id: 2, status: "done" },
-        { name: "iOS공부하기", tag: "programming", id: 3, status: "doing" },
-    ]
-}
+let list = [
+    { name: "훈련", tag: "training", id: 1, status: "done" },
+    { name: "등산", tag: "climing", id: 2, status: "done" },
+    { name: "iOS공부하기", tag: "programming", id: 3, status: "doing" },
+]
 
 const util = {
-    getTask: (task) => todoList.list.filter(listArr => listArr.status == task).length
+    getTask: (task) => list.filter(listArr => listArr.status == task).length
 }
 
 const todoCrud = {
     add: (addTask) => {
         const plusIdNumber = 1;
-        const lastTaskId = [...todoList.list].pop().id + plusIdNumber
-        const newList = [...todoList.list, { name: addTask.name, tag: addTask.tag, id: lastTaskId, status: "todo" }]
-        todoList.list = newList
+        const lastTaskId = [...list].pop().id + plusIdNumber
+        const newList = [...list, { name: addTask.name, tag: addTask.tag, id: lastTaskId, status: "todo" }]
+        list = newList
         return `id: ${lastTaskId}, "${addTask.name}" 항목이 새로 추가됐습니다.`
     },
 
     update: (status) => {
-        const [selectedObj] = [...todoList.list].filter(listArr => listArr.id == status.id)
+        const [selectedObj] = [...list].filter(listArr => listArr.id == status.id)
         const lowerStatus = status.nextstatus.toLowerCase()
         const print = `id: ${selectedObj.id}, ${selectedObj.name} 항목이 ${selectedObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
         현재상태 : todo: ${util.getTask('todo')}개, doing: ${util.getTask('doing')}개, done: ${util.getTask('done')}개`
@@ -55,14 +53,14 @@ const todoCrud = {
     },
 
     remove: (task) => {
-        const [deleteArr] = [...todoList.list].filter(listArr => listArr.id == task.id)
-        todoList.list.splice(task.id - 1, 1)
+        const [deleteArr] = [...list].filter(listArr => listArr.id == task.id)
+        list.splice(task.id - 1, 1)
         return `id:${task.id}, ${deleteArr.name} 삭제완료`
     }
 }
 
-console.log(todoList.list)
+console.log(list)
 console.log(todoCrud.add({ name: "자바스크립트 공부하기", tag: "programming" }))
 console.log(todoCrud.update({ id: 4, nextstatus: "doNe" }))
 console.log(todoCrud.remove({ id: 3 }))
-console.log(todoList.list)
+console.log(list)

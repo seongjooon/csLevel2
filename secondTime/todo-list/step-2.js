@@ -48,18 +48,17 @@ showAll메서드는 모든리스트를 출력하며, 2초-> 3초 ->2초로 출�
 - 21번, closure공부 1일 23분
 */
 
-const todoList = {
-    list: [
-        { name: "훈련", tag: "training", id: 1, status: "done" },
-        { name: "등산", tag: "climing", id: 2, status: "done" },
-        { name: "자바스크립트공부", tag: "programming", id: 13, status: "todo" },
-        { name: "iOS공부하기", tag: "programming", id: 17, status: "todo" },
-        { name: "closure공부", tag: "programming", id: 21, status: "done" }
-    ]
-}
+
+let list = [
+    { name: "훈련", tag: "training", id: 1, status: "done" },
+    { name: "등산", tag: "climing", id: 2, status: "done" },
+    { name: "자바스크립트공부", tag: "programming", id: 13, status: "todo" },
+    { name: "iOS공부하기", tag: "programming", id: 17, status: "todo" },
+    { name: "closure공부", tag: "programming", id: 21, status: "done" }
+]
 
 const util = {
-    getTask: (task, key) => todoList.list.filter(listArr => listArr.key == task).length
+    getTask: (task) => list.filter(listArr => listArr.status == task).length
 }
 
 const todoCrud = {
@@ -69,31 +68,32 @@ const todoCrud = {
 
     add: (addTask) => {
         const plusIdNumber = 1;
-        const lastTaskId = [...todoList.list].pop().id + plusIdNumber
-        const newList = [...todoList.list, { name: addTask.name, tag: addTask.tag, id: lastTaskId, status: "todo" }]
-        todoList.list = newList
+        const lastTaskId = [...list].pop().id + plusIdNumber
+        const newList = [...list, { name: addTask.name, tag: addTask.tag, id: lastTaskId, status: "todo" }]
+        list = newList
         return `id: ${lastTaskId}, "${addTask.name}" 항목이 새로 추가됐습니다.`
     },
 
     update: (status) => {
-        const [selectedObj] = [...todoList.list].filter(listArr => listArr.id == status.id)
+        const [selectedObj] = [...list].filter(listArr => listArr.id == status.id)
         const lowerStatus = status.nextstatus.toLowerCase()
+        const print = `id: ${selectedObj.id}, ${selectedObj.name} 항목이 ${selectedObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
+        현재상태 : todo: ${util.getTask('todo')}개, doing: ${util.getTask('doing')}개, done: ${util.getTask('done')}개`
         if (selectedObj.id === status.id) {
             selectedObj.status = lowerStatus
-            return `id: ${selectedObj.id}, ${selectedObj.name} 항목이 ${selectedObj.status} => ${lowerStatus} 상태로 업데이트 됐습니다.\n
-            현재상태 : todo: ${util.getTask('todo', selectedObj.status)}개, doing: ${util.getTask('doing', selectedObj.status)}개, done: ${util.getTask('done', selectedObj.status)}개`
+            return print;
         }
     },
 
     remove: (task) => {
-        const [deleteArr] = [...todoList.list].filter(listArr => listArr.id == task.id)
-        todoList.list.splice(task.id - 1, 1)
+        const [deleteArr] = [...list].filter(listArr => listArr.id == task.id)
+        list.splice(task.id - 1, 1)
         return `id:${task.id}, ${deleteArr.name} 삭제완료`
     }
 }
 
-console.log(todoList.list)
+console.log(list)
 
 console.log(todoCrud.showTag('programming'))
 
-console.log(todoList.list)
+console.log(list)
