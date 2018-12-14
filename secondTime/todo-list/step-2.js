@@ -62,10 +62,6 @@ const util = {
 }
 
 const todoCrud = {
-    showTag: (tag) => {
-
-    },
-
     add: (addTask) => {
         const plusIdNumber = 1;
         const lastTaskId = [...list].pop().id + plusIdNumber
