@@ -60,7 +60,11 @@ const todoCrud = {
 }
 
 console.log(list)
+
 console.log(todoCrud.add({ name: "자바스크립트 공부하기", tag: "programming" }))
+
 console.log(todoCrud.update({ id: 4, nextstatus: "doNe" }))
+
 console.log(todoCrud.remove({ id: 3 }))
+
 console.log(list)
